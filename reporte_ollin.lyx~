@@ -459,7 +459,7 @@ Amount of memory limited to 256 MB
 
 \begin_layout Standard
 \begin_inset Graphics
-	filename img/splash.png
+	filename splash.png
 	width 10cm
 
 \end_inset
@@ -474,7 +474,7 @@ En la cual escribimos el comando build para crear un nuevo frontend.
 
 \begin_layout Standard
 \begin_inset Graphics
-	filename img/pasted1.png
+	filename pasted1.png
 	width 10cm
 
 \end_inset
@@ -502,7 +502,7 @@ era la causante de la poca memoria, por lo que apagamos la opción y procedimos
 
 \begin_layout Standard
 \begin_inset Graphics
-	filename img/pasted2.png
+	filename pasted2.png
 	width 10cm
 
 \end_inset
@@ -550,7 +550,7 @@ rolls
 
 \begin_layout Standard
 \begin_inset Graphics
-	filename img/pasted3.png
+	filename pasted3.png
 	width 10cm
 
 \end_inset
@@ -600,7 +600,7 @@ Después de introducir los datos procedimos con la configuración de la red:
 
 \begin_layout Standard
 \begin_inset Graphics
-	filename img/pasted4.png
+	filename pasted4.png
 	width 10cm
 
 \end_inset
@@ -646,7 +646,7 @@ Netmask: 255.255.255.0
 \end_deeper
 \begin_layout Standard
 \begin_inset Graphics
-	filename img/pasted6.png
+	filename pasted6.png
 	width 10cm
 
 \end_inset
@@ -668,7 +668,7 @@ Después se establecio la contraseña:
 
 \begin_layout Standard
 \begin_inset Graphics
-	filename img/pasted7.png
+	filename pasted7.png
 	width 10cm
 
 \end_inset
@@ -682,7 +682,7 @@ Y se confiuro el tiempo:
 
 \begin_layout Standard
 \begin_inset Graphics
-	filename img/pasted8.png
+	filename pasted8.png
 	width 10cm
 
 \end_inset
@@ -704,7 +704,7 @@ Y se procedio al particionado del disco:
 
 \begin_layout Standard
 \begin_inset Graphics
-	filename img/pasted9.png
+	filename pasted9.png
 	width 10cm
 
 \end_inset
@@ -800,7 +800,7 @@ Y después se procedio con la instalación del sistema:
 
 \begin_layout Standard
 \begin_inset Graphics
-	filename img/pasted10.png
+	filename pasted10.png
 	width 10cm
 
 \end_inset
