@@ -40,28 +40,5 @@ def main(argv):
       for i in range(1, 11):
          subprocess.call(["scp", origin, nodes + "-" + str(i) + ":" + destination])
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   
-
-
-
-
-
-
-
-
 if __name__ == "__main__":
    main(sys.argv[1:])
