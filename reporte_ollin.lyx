@@ -1,5 +1,5 @@
-#LyX 2.0 created this file. For more info see http://www.lyx.org/
-\lyxformat 413
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
 \begin_document
 \begin_header
 \textclass article
@@ -12,13 +12,13 @@
 \font_roman default
 \font_sans default
 \font_typewriter default
+\font_math auto
 \font_default_family default
 \use_non_tex_fonts false
 \font_sc false
 \font_osf false
 \font_sf_scale 100
 \font_tt_scale 100
-
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -28,15 +28,24 @@
 \use_hyperref false
 \papersize default
 \use_geometry false
-\use_amsmath 1
-\use_esint 1
-\use_mhchem 1
-\use_mathdots 1
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
 \cite_engine basic
+\cite_engine_type default
+\biblio_style plain
 \use_bibtopic false
 \use_indices false
 \paperorientation portrait
 \suppress_date false
+\justification true
 \use_refstyle 1
 \index Index
 \shortcut idx
@@ -60,15 +69,70 @@
 \begin_body
 
 \begin_layout Title
-Reporte Olin
+Reporte técnico: Instalación de un cluster Hadoop en ollin.fisica.unam.mx (STCTYF
+ 2015-03)
+\end_layout
+
+\begin_layout Author
+Carlos Ernesto López Natarén, Ismael Fernández Martínez, Alberto Cano Ortiz
 \end_layout
 
 \begin_layout Section*
-Respaldo Olin:
+Introducción
 \end_layout
 
 \begin_layout Standard
-Se prendió el host master del sistema ollin, en él se empaquetaron los ficheros
+El servidor ollin.fisica.unam.mx hasta el año pasado funcionaba como servidor
+ de cálculo para algunos investigadores que requerían de un servidor con
+ capacidad de un procesador rápido pero sus requerimientos de almacenamiento
+ y de memoria RAM no eran demasiado exigentes.
+ Conforme la necesidad de algunos investigadores de tener mayor capacidad
+ de almacenamiento, se comenzaron a utilizar los espacios de disco duro
+ extra que habían en este cluster por medio del montaje de los discos de
+ los nodos esclavos al nodo master utilizando NFS.
+ El escalamiento de las necesidades de almacenamiento empeoraron el desempeño
+ del cluster y junto con este empeoramiento se puso en marcha nuestro cluster
+ mingus.fisica.unam.mx, los usuarios más demandantes de recursos fueron movidos
+ a este nuevo cluster y se mantuvo la configuración como se tenía para los
+ investigadores a los que se les pudiera otorgar el servicio pudieran seguir
+ trabajando.
+ 
+\end_layout
+
+\begin_layout Standard
+Conforme el cluster mingus se fue consolidando, se fueron migrando estos
+ usuarios también al nuevo cluster y se fue abandonando, esta migración
+ se fue haciendo usuario por usuario y se fueron haciendo respaldos y recuperaci
+ón de datos en el cluster mingus cada vez que uno de estos usuarios lo pedía,
+ los usuarios menos activos no se les abrió cuenta, por lo que sus datos
+ fueron mantenidos en ollin y necesitaban ser respaldados en caso de que
+ estos usuarios solicitaran estos datos y una cuenta en el cluster mingus.
+\end_layout
+
+\begin_layout Standard
+Este pequeño reporte es una actualización al estado de este cluster y el
+ proceso que junto con los estudiantes de servicio social hemos llevado
+ a cabo para darle de nuevo vida y que proporcione un servicio renovado
+ y con las capacidades de almacenamiento de un cluster Hadoop.
+\end_layout
+
+\begin_layout Section*
+Instalación
+\end_layout
+
+\begin_layout Standard
+La instalación constó de tres partes, la creación de los respaldos, la instalaci
+ón de la distribución Rocks Cluster Distribution y la instalación del rool
+ de Hadoop, a continuación se detallan estas.
+\end_layout
+
+\begin_layout Subsection*
+Respaldo
+\end_layout
+
+\begin_layout Standard
+Se procedió en primera instancia a hacer un respaldo de los usuarios, se
+ inició el host master del sistema ollin, en él se empaquetaron los ficheros
  
 \emph on
 /var
@@ -92,19 +156,19 @@ home
  de esté:
 \end_layout
 
-\begin_layout Itemize
+\begin_layout LyX-Code
 
 \emph on
 ollin$ tar cvf /home/var.tar /var/
 \end_layout
 
-\begin_layout Itemize
+\begin_layout LyX-Code
 
 \emph on
 ollin$ tar cvf /home/etc.tar /etc/
 \end_layout
 
-\begin_layout Itemize
+\begin_layout LyX-Code
 
 \emph on
 ollin$ tar cvf /home/opt.tar /opt/
@@ -145,7 +209,7 @@ Debido a que algunos usuarios tenían espacio en disco en los nodos de ollin,
  se busco que nodos eran y que tenían:
 \end_layout
 
-\begin_layout Itemize
+\begin_layout LyX-Code
 
 \emph on
 ollin$ cat /etc/fstab
@@ -163,7 +227,7 @@ home
  de ollin para guardar ahí los respaldos de los usuarios con memoria extra:
 \end_layout
 
-\begin_layout Itemize
+\begin_layout LyX-Code
 
 \emph on
 ollin$ mkdir /home/scratches
@@ -177,7 +241,7 @@ ssh
 :
 \end_layout
 
-\begin_layout Itemize
+\begin_layout LyX-Code
 
 \emph on
 ollin$ ssh ollin-1
@@ -191,7 +255,7 @@ nfs
 :
 \end_layout
 
-\begin_layout Itemize
+\begin_layout LyX-Code
 
 \emph on
 ollin-1$ /etc/init.d/nfs start
@@ -202,13 +266,13 @@ Montó sin problemas el fichero que contenía, por lo cual se realizo el respald
  sin complicaciones.
 \end_layout
 
-\begin_layout Itemize
+\begin_layout LyX-Code
 
 \emph on
 ollin$ tar cvf /home/scratch/soullard.tar /home/soullard/scratches
 \end_layout
 
-\begin_layout Itemize
+\begin_layout LyX-Code
 
 \emph on
 ollin$ ssh ollin-2
@@ -223,7 +287,7 @@ ntfs
 :
 \end_layout
 
-\begin_layout Itemize
+\begin_layout LyX-Code
 
 \emph on
 ollin-2$ /etc/init.d/nfs start
@@ -235,25 +299,25 @@ Por lo que tras varios intentos por lograr esto, reiniciando los servicios
  nuestro criterio podían impedir el montaje satisfacctorio.
 \end_layout
 
-\begin_layout Itemize
+\begin_layout LyX-Code
 
 \emph on
 ollin-2$ /etc/init.d/nfs (stop|star)
 \end_layout
 
-\begin_layout Itemize
+\begin_layout LyX-Code
 
 \emph on
 ollin-2$ /etc/init.d/netfs (stop|star)
 \end_layout
 
-\begin_layout Itemize
+\begin_layout LyX-Code
 
 \emph on
 ollin-2$ /etc/init.d/iptables (stop|start)
 \end_layout
 
-\begin_layout Itemize
+\begin_layout LyX-Code
 
 \emph on
 ollin-2$ /etc/init.d/nfs.lock (stop|start)
@@ -274,7 +338,7 @@ ssh
 :
 \end_layout
 
-\begin_layout Itemize
+\begin_layout LyX-Code
 
 \emph on
 ollin-2$ tar - cvf /scratches/abl/ | ssh ollin 
@@ -288,7 +352,7 @@ cat > /home/scratches/abl.tar
 
 \end_layout
 
-\begin_layout Itemize
+\begin_layout LyX-Code
 
 \emph on
 ollin-2$ tar - cvf /scratches/rivas/ | ssh ollin 
@@ -317,7 +381,7 @@ ssh
 :
 \end_layout
 
-\begin_layout Itemize
+\begin_layout LyX-Code
 
 \emph on
 ollin-4$ tar - cvf /scratches/huziel/ | ssh ollin 
@@ -340,7 +404,7 @@ ssh
 :
 \end_layout
 
-\begin_layout Itemize
+\begin_layout LyX-Code
 
 \emph on
 ollin-5$ tar - cvf /scratches/eduardor/ | ssh ollin 
@@ -354,7 +418,7 @@ cat > /home/scratches/eduardor.tar
 
 \end_layout
 
-\begin_layout Itemize
+\begin_layout LyX-Code
 
 \emph on
 ollin-5$ tar - cvf /scratches/lperez/ | ssh ollin 
@@ -372,8 +436,8 @@ cat > /home/scratches/lperez.tar
 Los demás nodos no contenían archivos a respaldar.
 \end_layout
 
-\begin_layout Section*
-Instalación Rocks:
+\begin_layout Subsection*
+Instalación Rocks
 \end_layout
 
 \begin_layout Standard
@@ -724,9 +788,9 @@ En la cual se decidio por Manual Partitioning y se decidio por una tabla
 \begin_layout Standard
 \begin_inset Tabular
 <lyxtabular version="3" rows="3" columns="2">
-<features tabularvalignment="middle">
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
 <row>
 <cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -805,6 +869,155 @@ Y después se procedio con la instalación del sistema:
 
 \end_inset
 
+
+\end_layout
+
+\begin_layout Subsection*
+Hadoop
+\end_layout
+
+\begin_layout Standard
+Apache Hadoop es un framework de software que soporta aplicaciones distribuidas
+ bajo una licencia de software libre tipo Apache.
+ Permite a las aplicaciones trabajar con miles de nodos y petabytes de datos.
+ Hadoop se inspiró en los 
+\begin_inset Quotes eld
+\end_inset
+
+white papers
+\begin_inset Quotes erd
+\end_inset
+
+ de Google para MapReduce y Google File System (GFS) para su implementación.
+ Este es un proyecto de alto nivel Apache que está siendo construido y usado
+ por una comunidad global de contribuyentes, utilizando el lenguaje de programac
+ión Java y soporte para muchas otras más.
+ Yahoo! ha sido el mayor contribuyente al proyecto, y usa Hadoop extensivamente
+ en su negocio.
+ En nuestro caso en particular instalamos una versión libre por medio de
+ un roll de Rocks que está en desarrollo, se puede encontrar en el siguiente
+ URL de Github: https://github.com/sdsc/hadoop-roll, es de hacerse notar
+ que hay distribuciones comerciales de Hadoop pero que no pudimos instalar
+ por las restricciones de las licencias o porque para utilizarlas se necesita
+ comprar licencias.
+ 
+\end_layout
+
+\begin_layout Subsection*
+Instalación de la paquetería para Hadoop
+\end_layout
+
+\begin_layout Standard
+El paquete de Hadoop en github nos permite tener una distribución libre
+ de Hadoop y un plugin de myHadoop (un plugin que nos permite añadir nodos
+ de Hadoop al vuelo en cluster de HPC).
+ 
+\end_layout
+
+\begin_layout Standard
+Un resumen de los paquetes que se utilizan en esta distribución de Hadoop
+ se encuentran en: 
+\end_layout
+
+\begin_layout Verbatim
+
+http://hadoop.apache.org/core/
+\end_layout
+
+\begin_layout Verbatim
+
+http://sourceforge.net/projects/myhadoop/
+\end_layout
+
+\begin_layout Standard
+Para hacer la instalación, se utiliza el nodo principal y se baja de la
+ página de github el paquete: 
+\end_layout
+
+\begin_layout LyX-Code
+git clone git@github.com:sdsc/hadoop-roll.git
+\end_layout
+
+\begin_layout Standard
+Una vez clonado se deben copiar estos archivos a la sección de desarrollo
+ del cluster Rocks y se ponen en el directorio src/<paquete>.
+\end_layout
+
+\begin_layout Standard
+Dependencias
+\end_layout
+
+\begin_layout Standard
+Se debe instalar el paquete sdsc de Rocks para poder construir el paquete
+ de Hadoop, ya que este tiene dependencias en sdsc, para construirlo se
+ llevan a cabo los siguientes comandos:
+\end_layout
+
+\begin_layout LyX-Code
+% make 2>&1 | tee build.log 
+\end_layout
+
+\begin_layout Standard
+Una creación exitosa nos creará un archivo .iso llamado hadoop-*.disk1.iso,
+ si se construye en el nodo master del cluster, se procede a instalarlo,
+ si es en uno de desarrollo, entonces se necesita copiar la imagen iso al
+ master para poder instalarlo.
+\end_layout
+
+\begin_layout Standard
+Para instalarlo se llevan finalmente a cabo los siguientes comandos:
+\end_layout
+
+\begin_layout LyX-Code
+% rocks add roll *.iso
+\end_layout
+
+\begin_layout LyX-Code
+% rocks enable roll hadoop
+\end_layout
+
+\begin_layout LyX-Code
+% cd /export/rocks/install
+\end_layout
+
+\begin_layout LyX-Code
+% rocks create distro
+\end_layout
+
+\begin_layout LyX-Code
+% rocks run roll hadoop | bash
+\end_layout
+
+\begin_layout Standard
+Una vez instalado, el paquete instala también archivos de configuración
+ en:
+\end_layout
+
+\begin_layout LyX-Code
+/opt/modulefiles/applications/hadoop 
+\end_layout
+
+\begin_layout Standard
+Es importante saber que hay un test para probar que todo haya quedado bien
+ y se utiliza con el siguiente comando:
+\end_layout
+
+\begin_layout LyX-Code
+% /root/rolltests/hadoop.t 
+\end_layout
+
+\begin_layout Section*
+Conclusión
+\end_layout
+
+\begin_layout Standard
+La instalación fue exitosa, es necesario ahora hacer pruebas sobre la capacidad
+ que tendremos con estos nodos, pero tenemos de nuevo un cluster en funcionamien
+to y que podrá ser usado para llevar a cabo testing de programas que pueden
+ ser usados a más grande nivel de rendimiento en el cluster mingus.fisica.unam.mx
+\end_layout
+
+\begin_layout Standard
 
 \end_layout
 
