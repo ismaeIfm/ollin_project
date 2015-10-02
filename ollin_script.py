@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import sys, getopt, pexpect, time
+import sys, getopt, os, subprocess
 
 def main(argv):
    command = ''
@@ -16,27 +16,17 @@ def main(argv):
          print 'ollin_script.py -c <command>'
          sys.exit()
       elif opt in ("-c", "--command"):
-         command = arg + ' &'
+         command = arg
       elif opt == "--exclude-master":
          master = False
-
-   ssh = pexpect.spawn('ssh root@ollin.fisica.unam.mx')
-
+   
    if master:
-	ssh.sendline(command)
+      os.system(command)
+   for i in range(1, 11):
+      subprocess.call(["ssh", "ollin-" + str(i), command])
 
-   ssh.sendline('ssh ollin-1 nohup ' + command)
-   ssh.sendline('ssh ollin-2 nohup ' + command)
-   ssh.sendline('ssh ollin-3 nohup ' + command)
-   ssh.sendline('ssh ollin-4 nohup ' + command)
-   ssh.sendline('ssh ollin-5 nohup ' + command)   
-   ssh.sendline('ssh ollin-6 nohup ' + command)
-   ssh.sendline('ssh ollin-7 nohup ' + command)
-   ssh.sendline('ssh ollin-8 nohup ' + command)
-   ssh.sendline('ssh ollin-9 nohup ' + command)
-   ssh.sendline('ssh ollin-10 nohup ' + command)
+      
 
-   time.sleep(1)
 
 	
 if __name__ == "__main__":
