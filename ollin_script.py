@@ -4,11 +4,13 @@ import sys, getopt, pexpect, time
 def main(argv):
    command = ''
    master = True
+
    try:
       opts, args = getopt.getopt(argv,"hc:",["command=", "exclude-master"])
    except getopt.GetoptError:
       print 'ollin_script.py -c <command>'
       sys.exit(2)
+
    for opt, arg in opts:
       if opt == '-h':
          print 'ollin_script.py -c <command>'
