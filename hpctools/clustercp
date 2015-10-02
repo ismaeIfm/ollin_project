@@ -7,16 +7,16 @@ def main(argv):
    destination = ""
    recursive = False
    try: 
-      opts, args = getopt.getopt(argv,"hro:d:",["origin=", "destination="])
+      opts, args = getopt.getopt(argv,"hro:d:",["origin=", "destination=", "help"])
    except getopt.GetoptError:
-      print 'copyFile2ollin.py -o <origin> -d <destination>'
+      print 'clustercp -o <origin> -d <destination>'
       print 'For directories add -r'
       sys.exit(2)
 
    for opt, arg in opts:
-      if opt == '-h':
-         print 'copyFile2ollin.py -o <origin> -d <destination>'
-         print 'copyFile2ollin.py -o <origin> -d <destination>'
+      if opt in ("-h", "--help"):
+         print 'clustercp -o <origin> -d <destination>'
+         print '\tFor directories add -r'
       	 sys.exit()
       elif opt in ("-o", "--origin"):
          origin = arg

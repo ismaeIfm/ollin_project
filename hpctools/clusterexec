@@ -6,14 +6,14 @@ def main(argv):
    master = True
 
    try:
-      opts, args = getopt.getopt(argv,"hc:",["command=", "exclude-master"])
+      opts, args = getopt.getopt(argv,"hc:",["command=", "exclude-master", "help"])
    except getopt.GetoptError:
-      print 'ollin_script.py -c <command>'
+      print 'clusterexec -c <command>'
       sys.exit(2)
 
    for opt, arg in opts:
-      if opt == '-h':
-         print 'ollin_script.py -c <command>'
+      if opt in ("-h", "--help"):
+         print 'clusterexec -c <command>'
          sys.exit()
       elif opt in ("-c", "--command"):
          command = arg
