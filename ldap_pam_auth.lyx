@@ -156,6 +156,10 @@ Durante la instalacion se nos preguntaron varios campos de la configuracion
 
 \end_layout
 
+\begin_layout Standard
+Es importante notar que se uso la conexion via ldap no ldaps ni ldapi.
+\end_layout
+
 \begin_layout Itemize
 \begin_inset Graphics
 	filename img/ldap-2.png
@@ -211,13 +215,13 @@ Durante la instalacion se nos preguntaron varios campos de la configuracion
 \end_layout
 
 \begin_layout Standard
-Una vez terminada la instalación se debe reconfigurar a sldap debido a que
+Una vez terminada la instalación se debe reconfigurar LDAP debido a que
  en la instalación no se presentaron algunos campos necesarios.
- Para reconfigurar a slap:
+ Para reconfigurar a LDAP:
 \end_layout
 
 \begin_layout Itemize
-sudo dpkg-reconfigure slapd
+sudo dpkg-reconfigure ldap-auth-config
 \end_layout
 
 \begin_layout Standard
@@ -281,6 +285,12 @@ Después de añadir el módulo:
 \end_layout
 
 \begin_layout Standard
+NOTA: Es muy importante que el modulo LDAP sea añadido después del modulo
+ compat, de lo contrario si el equipo es apagado cuando vuelva a prender
+ no podrá iniciar el sistema.
+\end_layout
+
+\begin_layout Standard
 Después editamos la configuración PAM al añadir en el archivo /etc/pam.d/common-s
 ession la siguiente la línea al final del archivo:
 \end_layout
@@ -307,7 +317,7 @@ sudo /etc/init.d/nscd start
 \end_layout
 
 \begin_layout Section
-Conclusión
+Prueba de LDAP
 \end_layout
 
 \begin_layout Standard
@@ -316,6 +326,154 @@ Después de probar con la intalación y configuración anterior y no tener
  para poder ser acreditados deben de estar presentes en el archivo /etc/passwd.
  De lo contrario recibiremos un mensaje de error reportando que las credenciales
  son invalidas (Invalid Credentials).
+\end_layout
+
+\begin_layout Subsection
+Seguridad con LDAP
+\end_layout
+
+\begin_layout Standard
+Después de poder acreaditar usuarios, sniffeamos la conversación entre el
+ cliente y el servidor LDAP para probar la seguridad del protocolo y encontramos
+ que el protocolo expone las contraseñas tanto de los usuarios como de la
+ base LDAP:
+\end_layout
+
+\begin_layout Itemize
+Contraseña de la base:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename img/sniffer-1.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Contraseña del usuario(%Unlimited2):
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename img/sniffer-2.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Por lo que recomendamos altamente no usar el protocolo LDAP pues expone
+ la información de los usuarios.
+\end_layout
+
+\begin_layout Section
+LDAPS
+\end_layout
+
+\begin_layout Standard
+Al haber descubierto que el protocolo LDAP es vulnerable, nos decidimos
+ usar LDAPS.
+ Para configurar LDAPS debemos reconfigurar:
+\end_layout
+
+\begin_layout Itemize
+sudo dpkg-reconfigure ldap-auth-config
+\end_layout
+
+\begin_layout Standard
+Y cuando nos pregunte por el servidor LDAP añadir una 's' en el protocolo:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename img/ldap-10.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Los demás campos serán configurados de la misma manera que lo fueron para
+ LDAP.
+\end_layout
+
+\begin_layout Standard
+Lo siguiente será buscar en nuestro servidor LDAP el certificado autofirmado,
+ si es que nuestro servidor fue configurado para usar SSL, y copiarlo al
+ cliente.
+ Después en el archivo /etc/ldap.conf añadir la ruta del certificado que
+ copiamos como valor al campo 
+\emph on
+tls_cacertfile y
+\emph default
+ también añadirla la ruta al campo TLS_CACERT en el archivo /etc/ldap/ldap.conf.
+\end_layout
+
+\begin_layout Standard
+Por último reiniciamos el servicio nscd:
+\end_layout
+
+\begin_layout Itemize
+sudo /etc/init.d/nscd stop
+\end_layout
+
+\begin_layout Itemize
+sudo /etc/init.d/nscd start
+\end_layout
+
+\begin_layout Subsection
+Seguridad con LDAPS
+\end_layout
+
+\begin_layout Standard
+Después repetimos el proceso empleado para revisar la seguridad con LDAP.
+ Sniffeamos las conversaciones entre cliente y servidor:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Graphics
+	filename img/sniffer-3.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Graphics
+	filename img/sniffer-4.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Graphics
+	filename img/sniffer-5.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Graphics
+	filename img/sniffer-6.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Con lo que podemos concluir que LDAPS funciona y no expone información por
+ lo que recomendamos altamente su uso en vez de LDAP.
 \end_layout
 
 \begin_layout Section
