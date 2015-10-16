@@ -742,7 +742,12 @@ Antes de modificar la linea.
 \end_layout
 
 \begin_layout Standard
-png
+\begin_inset Graphics
+	filename img/server-ldap12.png
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -750,7 +755,12 @@ Despues de modificar la linea.
 \end_layout
 
 \begin_layout Standard
-png
+\begin_inset Graphics
+	filename img/server-ldap13.png
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -783,7 +793,12 @@ Antes de modificar la linea.
 \end_layout
 
 \begin_layout Standard
-png
+\begin_inset Graphics
+	filename img/server-ldap14.png
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -791,7 +806,12 @@ Despues de modificar la linea.
 \end_layout
 
 \begin_layout Standard
-png 
+\begin_inset Graphics
+	filename img/server-ldap15.png
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -813,7 +833,12 @@ Antes de modificar la linea
 \end_layout
 
 \begin_layout Standard
-png 
+\begin_inset Graphics
+	filename img/server-ldap16.png
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -821,7 +846,12 @@ Despues de modificar la linea
 \end_layout
 
 \begin_layout Standard
-png
+\begin_inset Graphics
+	filename img/server-ldap17.png
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -849,7 +879,12 @@ Antes de modificar la linea
 \end_layout
 
 \begin_layout Standard
-png
+\begin_inset Graphics
+	filename img/server-ldap18.png
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -857,7 +892,12 @@ Despues de modificar la linea.
 \end_layout
 
 \begin_layout Standard
-png
+\begin_inset Graphics
+	filename img/server-ldap19.png
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
