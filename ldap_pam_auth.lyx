@@ -529,11 +529,16 @@ sudo apt install slapd ldap-utils
 \end_layout
 
 \begin_layout Standard
-Durante la instalación se debera proporcionar una contraseña de administrador
+Durante la instalación se debera proporcionar una contraseña de administrado
 \end_layout
 
 \begin_layout Standard
-png
+\begin_inset Graphics
+	filename img/server-ldap1.png
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -541,7 +546,12 @@ Se debera confirmar la contraseña que se ha ingresado
 \end_layout
 
 \begin_layout Standard
-png
+\begin_inset Graphics
+	filename img/server-ldap2.png
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -559,7 +569,12 @@ Seleccionar No para tener acceso a la configuracion LDAP.
 \end_layout
 
 \begin_layout Standard
-png
+\begin_inset Graphics
+	filename img/server-ldap3.png
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -568,7 +583,12 @@ Se debera proporcionar un DNS que es usado para contruir el nombre de dominio
 \end_layout
 
 \begin_layout Standard
-png
+\begin_inset Graphics
+	filename img/server-ldap4.png
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -576,7 +596,12 @@ Se debera proporcionar el nombre de la organización.
 \end_layout
 
 \begin_layout Standard
-png
+\begin_inset Graphics
+	filename img/server-ldap5.png
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -586,7 +611,12 @@ dor.
 \end_layout
 
 \begin_layout Standard
-png
+\begin_inset Graphics
+	filename img/server-ldap6.png
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -594,7 +624,12 @@ Se debera confirmar la contraseña.
 \end_layout
 
 \begin_layout Standard
-png
+\begin_inset Graphics
+	filename img/server-ldap7.png
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -603,7 +638,39 @@ Se debera seleccionar un tipo de base de datos, seguiremos la recomendacion
 \end_layout
 
 \begin_layout Standard
-png
+\begin_inset Graphics
+	filename img/server-ldap8.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Se debera elegir si al purgar la instalacion se eliminara tambien la base.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename img/server-ldap9.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Se debera elegir si al crear una nueva base, los archivos en /var/lib/ldap
+ seran movidos junto con la vieja base.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename img/server-ldap10.png
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -616,7 +683,12 @@ en nuestro caso se usara el protocolo LDAPv3.
 \end_layout
 
 \begin_layout Standard
-png
+\begin_inset Graphics
+	filename img/server-ldap11.png
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -733,7 +805,7 @@ la linea
 \end_layout
 
 \begin_layout Itemize
-$servers->setValue('login','bind_id','cn=admin');
+$servers->setValue('login','bind_id','');
 \end_layout
 
 \begin_layout Standard
@@ -794,10 +866,6 @@ Seleccionamos guardar los cambios y cerramos el archivo.
 
 \begin_layout Standard
 Ahora aseguraremos nuestra conexion a LDAP server via SSL.
-\end_layout
-
-\begin_layout Standard
-
 \end_layout
 
 \end_body
