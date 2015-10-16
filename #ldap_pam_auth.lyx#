@@ -567,15 +567,7 @@ png
 
 \begin_layout Standard
 Se debera proporcionar un DNS que es usado para contruir el nombre de dominio
- base del directorio de LDAP
-\end_layout
-
-\begin_layout Standard
-png
-\end_layout
-
-\begin_layout Standard
-Se debera proporcionar el nombre de la organización 
+ de la 
 \end_layout
 
 \end_body
