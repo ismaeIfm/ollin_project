@@ -636,11 +636,58 @@ sudo apt install phpLDAPadmin
 \begin_layout Standard
 Notese que necesitamos configurar phpLDAPadmin para utilizar el esquema
  de dominio configurado para LDAP, tambien haremos algunos cambios para
- asegurar nuestra configuración.
+ asegurar 
 \end_layout
 
 \begin_layout Standard
+nuestra configuración.
+\end_layout
 
+\begin_layout Standard
+Comenzaremos editando el archivo de configuracion principal de phpLDAPadmin.
+\end_layout
+
+\begin_layout Itemize
+sudo emacs /etc/phpLDAPadmin/config.php
+\end_layout
+
+\begin_layout Standard
+En este archivo agregaremos detalles de configuracion que seran cargados
+ cada ves que sea iniciado nuesto servidor LDAP, busquemos
+\end_layout
+
+\begin_layout Itemize
+servers->setValue('server','host','');
+\end_layout
+
+\begin_layout Standard
+En esta linea se debe especificar el parametro host, poniendo el nombre
+ de dominio del servidor o la direccion IP publica.
+\end_layout
+
+\begin_layout Standard
+Antes de modificar la linea.
+\end_layout
+
+\begin_layout Standard
+png
+\end_layout
+
+\begin_layout Standard
+Despues de modificar la linea.
+\end_layout
+
+\begin_layout Standard
+png
+\end_layout
+
+\begin_layout Standard
+Este parametro debe mostrar el camino de acceso a la interface web.
+\end_layout
+
+\begin_layout Standard
+Ahora necesitamos configurar el nombre de dominio que seleccionamos para
+ nuestro servidor LDAP, en nuestro caso se selecciono fisica.unam.mx
 \end_layout
 
 \end_body
