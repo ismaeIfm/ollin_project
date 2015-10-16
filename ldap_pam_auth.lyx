@@ -723,6 +723,80 @@ png
 \end_layout
 
 \begin_layout Standard
+Ahora debemos modificar lo mismo en nuestro parametro login id_bin, el parametro
+ cn es puesto siempre como admin, i.e.
+ solo debemos modificar los campos dc en 
+\end_layout
+
+\begin_layout Standard
+la linea 
+\end_layout
+
+\begin_layout Itemize
+$servers->setValue('login','bind_id','cn=admin');
+\end_layout
+
+\begin_layout Standard
+Antes de modificar la linea
+\end_layout
+
+\begin_layout Standard
+png 
+\end_layout
+
+\begin_layout Standard
+Despues de modificar la linea
+\end_layout
+
+\begin_layout Standard
+png
+\end_layout
+
+\begin_layout Standard
+Ahora debemos modificar la linea
+\end_layout
+
+\begin_layout Itemize
+$config->custom->appearance['hide_template_warning'] = false;
+\end_layout
+
+\begin_layout Standard
+Por defecto phpLDAPadmin en su interface grafica, muestra un gran numero
+ de advertencias sobre archivos que no impactan con la funcionalidad, podemos
+ ocultar estos buscando para el parámetro hide_template_warning, eliminando
+ la marca de comentario en la línea que la contiene, y se estableciendo
+ este en "true" 
+\end_layout
+
+\begin_layout Itemize
+$config->custom->appearance['hide_template_warning'] = true;
+\end_layout
+
+\begin_layout Standard
+Antes de modificar la linea
+\end_layout
+
+\begin_layout Standard
+png
+\end_layout
+
+\begin_layout Standard
+Despues de modificar la linea.
+\end_layout
+
+\begin_layout Standard
+png
+\end_layout
+
+\begin_layout Standard
+Seleccionamos guardar los cambios y cerramos el archivo.
+\end_layout
+
+\begin_layout Standard
+Ahora aseguraremos nuestra conexion a LDAP server via SSL.
+\end_layout
+
+\begin_layout Standard
 
 \end_layout
 
