@@ -546,11 +546,8 @@ png
 
 \begin_layout Standard
 Durante la instalación de los paquetes se han omitido preguntas de configuración
- importantes del servidos LDAP, para poder tener acceso a las mismas debemos
-\end_layout
-
-\begin_layout Standard
-reconfigurar el paquete slapd
+ importantes del servidor LDAP, para poder tener acceso a las mismas debemos
+ reconfigurar el paquete slapd
 \end_layout
 
 \begin_layout Itemize
@@ -558,7 +555,7 @@ sudo dpkg-reconfigure slapd
 \end_layout
 
 \begin_layout Standard
-Seleccional No para tener acceso a la configuracion LDAP
+Seleccionar No para tener acceso a la configuracion LDAP.
 \end_layout
 
 \begin_layout Standard
@@ -567,7 +564,7 @@ png
 
 \begin_layout Standard
 Se debera proporcionar un DNS que es usado para contruir el nombre de dominio
- base del directorio de LDAP
+ base del directorio de LDAP.
 \end_layout
 
 \begin_layout Standard
@@ -575,7 +572,75 @@ png
 \end_layout
 
 \begin_layout Standard
-Se debera proporcionar el nombre de la organización 
+Se debera proporcionar el nombre de la organización.
+\end_layout
+
+\begin_layout Standard
+png
+\end_layout
+
+\begin_layout Standard
+Se debera proporcionar una contraseña de administrador, notese que se esta
+ reconfigurando el servido por tanto esta sera la nueva contraseña de administra
+dor.
+\end_layout
+
+\begin_layout Standard
+png
+\end_layout
+
+\begin_layout Standard
+Se debera confirmar la contraseña.
+\end_layout
+
+\begin_layout Standard
+png
+\end_layout
+
+\begin_layout Standard
+Se debera seleccionar un tipo de base de datos, seguiremos la recomendacion
+ y seleccionaremos HDB.
+\end_layout
+
+\begin_layout Standard
+png
+\end_layout
+
+\begin_layout Standard
+Se debera seleccionar No, se desea usar el protocolo LDAPv3, en otro caso
+ permitir el uso del protocolo LDAPv2, 
+\end_layout
+
+\begin_layout Standard
+en nuestro caso se usara el protocolo LDAPv3.
+\end_layout
+
+\begin_layout Standard
+png
+\end_layout
+
+\begin_layout Standard
+Aunque es posible administrar LDAP desde la linea de comandos esto resulta
+ complejo para algunos usuarios es
+\end_layout
+
+\begin_layout Standard
+por eso que se instalara el paquete phpLDAPadmin, que nos proporcionara
+ una interface web.
+\end_layout
+
+\begin_layout Itemize
+sudo apt install phpLDAPadmin
+\end_layout
+
+\begin_layout Standard
+Notese que necesitamos configurar phpLDAPadmin para utilizar el esquema
+ de dominio configurado para LDAP, tambien haremos algunos cambios para
+ asegurar nuestra configuración.
+\end_layout
+
+\begin_layout Standard
+
 \end_layout
 
 \end_body
