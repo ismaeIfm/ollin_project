@@ -33,7 +33,7 @@ def main(argv):
     number_nodes = int(configParser.get('file', 'number_nodes'))
 
     for i in range(1, number_nodes + 1):
-        subprocess.call(["ssh -t", nodes + "-" + str(i), command])
+        subprocess.call(["ssh", "-t", nodes + "-" + str(i), command])
 
 
 if __name__ == "__main__":
